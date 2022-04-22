@@ -6,7 +6,7 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 11:31:44 by klew              #+#    #+#             */
-/*   Updated: 2022/03/27 16:31:15 by klew             ###   ########.fr       */
+/*   Updated: 2022/04/20 21:31:40 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_itoa(int n)
 	}
 	if (n == 0)
 		return (ft_strdup("0"));
-	if (n == INT_MIN)
+	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	len = ft_get_len(n) + neg;
 	str = (char *)malloc(sizeof(char) * len + 1);

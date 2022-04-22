@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 20:02:10 by klew              #+#    #+#             */
-/*   Updated: 2022/04/20 17:24:11 by klew             ###   ########.fr       */
+/*   Created: 2022/03/27 10:07:08 by klew              #+#    #+#             */
+/*   Updated: 2022/04/21 18:34:10 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(char *str)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	i;
+	int	res;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	while (n--)
+	{
+		res = *((unsigned char *)s1++) - *((unsigned char *)s2++);
+		if ((res))
+			return (res);
+	}
+	return (0);
 }
