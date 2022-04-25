@@ -1,4 +1,5 @@
-*.o
+%.o
+%.a
 .DS_Store
 main.c
 libft-war-machine
