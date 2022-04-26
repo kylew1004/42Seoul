@@ -6,120 +6,87 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 21:31:04 by klew              #+#    #+#             */
-/*   Updated: 2022/04/26 20:27:34 by klew             ###   ########.fr       */
+/*   Updated: 2022/04/26 22:00:33 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**ft_malloc_error(char **str)
+char	*ft_strndup(const char *s, size_t n)
 {
-	int	index;
+	size_t	i;
+	char	*str;
 
-	index = 0;
-	while (!str[index])
-	{
-		free(str[index++]);
-	}
-	free(str);
-	return (NULL);
-}
-
-static char	*ft_strndup(const char *s, int len)
-{
-	char	*res;
-	int		index;
-
-	res = NULL;
-	index = 0;
-	if (len == 0)
+	i = 0;
+	str = NULL;
+	if (n == 0)
 		return (NULL);
-	if (!(res = (char*)malloc(sizeof(char) * (len + 1))))
-	{
+	str = (char *)malloc(sizeof(char) * (n + 1));
+	if (str == 0)
 		return (NULL);
-	}
-	while (index < len)
+	while (i < n)
 	{
-		res[index] = s[index];
-		index++;
+		str[i] = s[i];
+		i++;
 	}
-	res[index] = '\0';
-	return (res);
-}
-
-static char	*ft_makestr(const char *s1, char c, int *flag)
-{
-	char	*middle;
-	int		index;
-
-	*flag = 1;
-	middle = NULL;
-	index = 0;
-	while (s1[index] != '\0')
-	{
-		if (s1[index] == c)
-		{
-			middle = ft_strndup(s1, index);
-			if (!middle)
-				return (NULL);
-			return (middle);
-		}
-		else if (index == (int)(ft_strlen(s1)) - 1)
-			{
-			middle = ft_strndup(s1, index + 1);
-			if (!middle)
-				return (NULL);
-			return (middle);
-		}
-		index++;
-	}
-	return (NULL);
-}
-
-static int	ft_word_count(const char *s, char c)
-{
-	int	wc;
-	int	index;
-
-	wc = 0;
-	index = 0;
-	while (s[index] != '\0')
-	{
-		if ((index == 0 && s[0] != c) ||
-		(s[index] == c && s[index + 1] != c && s[index + 1] != '\0'))
-		{
-			wc++;
-		}
-		index++;
-	}
-	return (wc);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	char	**str;
-	char	*middle;
-	int		flag;
-	int		index;
-	int		strindex;
-
-	strindex = 0;
-	index = 0;
-	if (!(str = (char**)malloc(sizeof(char*) * (ft_word_count(s, c) + 1))))
-		return (NULL);
-	while (s[index] != '\0')
-	{
-		flag = 0;
-		if (index == 0 && s[0] != c)
-			middle = ft_makestr(&s[index], c, &flag);
-		else if ((s[index] == c && s[index + 1] != c && s[index + 1] != '\0'))
-			middle = ft_makestr(&s[index + 1], c, &flag);
-		if (flag == 1 && middle == NULL)
-			return (ft_malloc_error(str));
-		else if (flag == 1)
-			str[strindex++] = middle;
-		index++;
-	}
-	str[strindex] = 0;
+	str[i] = '\0';
 	return (str);
+}
+
+char	**ft_freeall(char **list)
+{
+	size_t	j;
+
+	j = 0;
+	while (list[j])
+	{
+		free(list[j]);
+		j++;
+	}
+	free(list);
+	return (NULL);
+}
+
+size_t	ft_wordcount(char const *s, char c)
+{
+	size_t	listsize;
+	size_t	i;
+
+	i = 0;
+	listsize = 0;
+	while (s[i] != '\0')
+	{
+		if ((i == 0 && s[i] != c) || \
+		(s[i] == c && s[i + 1] != '\0' && s[i + 1] != c))
+			listsize++;
+		i++;
+	}
+	return (listsize);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**strlist;
+	size_t	i;
+	size_t	k;
+	size_t	save;
+
+	i = 0;
+	k = 0;
+	strlist = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
+	if (!strlist)
+		return (NULL);
+	while (i < ft_wordcount(s, c) && s[k] != '\0')
+	{
+		while (s[k] == c)
+			k++;
+		save = k;
+		while (s[k] != c && s[k] != '\0')
+			k++;
+		strlist[i] = ft_strndup(&s[save], k - save);
+		if (strlist[i++] == 0)
+			return (ft_freeall(strlist));
+	}
+	strlist[i] = NULL;
+	return (strlist);
 }

@@ -6,7 +6,7 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:31:16 by klew              #+#    #+#             */
-/*   Updated: 2022/04/26 20:19:31 by klew             ###   ########.fr       */
+/*   Updated: 2022/04/26 21:56:10 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	*ft_memmove(void *dest, const void *src, size_t num)
 	{
 		while (index < num)
 		{
-			((unsigned char *)dest)[num - 1 - index] =
-			((unsigned char *)src)[num - 1 - index];
+			((unsigned char *)dest)[num - 1 - index]
+				= ((unsigned char *)src)[num - 1 - index];
 			index++;
 		}
 	}

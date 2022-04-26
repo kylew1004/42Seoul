@@ -6,7 +6,7 @@
 #    By: klew <klew@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/27 13:22:18 by klew              #+#    #+#              #
-#    Updated: 2022/04/26 20:16:17 by klew             ###   ########.fr        #
+#    Updated: 2022/04/26 22:06:52 by klew             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,37 +20,33 @@ SRC =		ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 
 OBJS = $(SRC:.c=.o)
 
-SRCS_BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
-				ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
+BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
+			ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
 
-OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
+BONUS_OBJS		= $(BONUS:.c=.o)
 
-NAME		=	libft.a
-RM		=	rm -f
-LIB		=	ar rcu
-CC		=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+CC = gcc
 
-ifdef WITH_BONUS
-	OBJ_SWITCH = $(OBJS_BONUS)
-else
-	OBJ_SWITCH = $(OBJS)
-endif
+RM = rm -f
 
-$(NAME)	:	$(OBJ_SWITCH)
-			$(LIB) $@ $^
+CFLAGS = -Wall -Wextra -Werror
 
-all		:	bonus $(NAME)
+NAME = libft.a
 
-clean	:
-			$(RM) $(OBJS) $(OBJS_BONUS)
+all: $(NAME)
 
-fclean	:	clean
-			$(RM) $(NAME)
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-re		:	fclean all
+clean:
+	$(RM) $(OBJS) $(BONUS_OBJS)
 
-bonus	:
-			$(MAKE) WITH_BONUS=1 $(NAME)
+fclean:	clean
+	$(RM) $(NAME)
 
-.PHONY	:	all clean fclean re bonus
+re: fclean all
+
+bonus:			$(OBJS) $(BONUS_OBJS)
+				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+
+.PHONY: all clean fclean re bonus
