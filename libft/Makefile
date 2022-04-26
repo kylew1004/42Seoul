@@ -6,7 +6,7 @@
 #    By: klew <klew@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/27 13:22:18 by klew              #+#    #+#              #
-#    Updated: 2022/04/22 20:44:19 by klew             ###   ########.fr        #
+#    Updated: 2022/04/26 20:16:17 by klew             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,36 +17,40 @@ SRC =		ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
 			ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
 			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
-			
+
 OBJS = $(SRC:.c=.o)
 
-BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
-			ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
+SRCS_BONUS	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
+				ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
 
-BONUS_OBJS		= $(BONUS:.c=.o)
+OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
 
-CC = gcc
+NAME		=	libft.a
+RM		=	rm -f
+LIB		=	ar rcu
+CC		=	gcc
+CFLAGS		=	-Wall -Wextra -Werror
 
-RM = rm -f
+ifdef WITH_BONUS
+	OBJ_SWITCH = $(OBJS_BONUS)
+else
+	OBJ_SWITCH = $(OBJS)
+endif
 
-CFLAGS = -Wall -Wextra -Werror
+$(NAME)	:	$(OBJ_SWITCH)
+			$(LIB) $@ $^
 
-NAME = libft.a
+all		:	bonus $(NAME)
 
-all: $(NAME)
+clean	:
+			$(RM) $(OBJS) $(OBJS_BONUS)
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+fclean	:	clean
+			$(RM) $(NAME)
 
-clean:
-	$(RM) $(OBJS)
+re		:	fclean all
 
-fclean:	clean
-	$(RM) $(NAME)
+bonus	:
+			$(MAKE) WITH_BONUS=1 $(NAME)
 
-re: fclean all
-
-bonus:			$(OBJS) $(BONUS_OBJS)
-				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-
-.PHONY: all clean fclean re bonus
+.PHONY	:	all clean fclean re bonus
