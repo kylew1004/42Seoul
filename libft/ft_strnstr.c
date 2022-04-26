@@ -6,31 +6,52 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 10:44:38 by klew              #+#    #+#             */
-/*   Updated: 2022/04/20 21:22:50 by klew             ###   ########.fr       */
+/*   Updated: 2022/04/26 16:06:48 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+static int	ft_find(char *str, const char *find, size_t len, size_t strindex)
 {
-	size_t	i;
-	size_t	j;
+	size_t	index;
 
-	if (!haystack || !needle)
-		return (NULL);
-	if (!needle || !needle[0])
-		return ((char*)haystack);
-	i = 0;
-	while (haystack[i] && i < len)
+	index = 0;
+	while (find[index] != '\0')
 	{
-		j = 0;
-		while (haystack[i + j] && needle[j] &&
-				i + j < len && haystack[i + j] == needle[j])
-			j++;
-		if (!needle[j])
-			return ((char*)(haystack + i));
-		i++;
+		if (strindex >= len)
+		{
+			return (0);
+		}
+		if (find[index] != str[strindex])
+		{
+			return (0);
+		}
+		strindex++;
+		index++;
+	}
+	return (1);
+}
+
+char	*ft_strnstr(const char *strr, const char *find, size_t len)
+{
+	size_t	strindex;
+	char	*str;
+
+	str = (char *)(strr);
+	strindex = 0;
+	if (*find == 0)
+		return (str);
+	while (str[strindex] != '\0')
+	{
+		if (ft_find(str, find, len, strindex) == 0)
+		{
+			strindex++;
+		}
+		else if (ft_find(str, find, len, strindex) == 1)
+		{
+			return (&str[strindex]);
+		}
 	}
 	return (NULL);
 }
