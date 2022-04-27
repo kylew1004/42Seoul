@@ -6,87 +6,84 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 21:31:04 by klew              #+#    #+#             */
-/*   Updated: 2022/04/26 22:00:33 by klew             ###   ########.fr       */
+/*   Updated: 2022/04/21 20:03:25 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s, size_t n)
+int	ft_word_count(char const *s, char c)
 {
-	size_t	i;
-	char	*str;
+	int	i;
+	int	cnt;
 
 	i = 0;
-	str = NULL;
-	if (n == 0)
-		return (NULL);
-	str = (char *)malloc(sizeof(char) * (n + 1));
-	if (str == 0)
-		return (NULL);
-	while (i < n)
+	cnt = 0;
+	while (s[i])
 	{
-		str[i] = s[i];
-		i++;
+		if (s[i] == c)
+			i++;
+		else
+		{
+			cnt++;
+			while (s[i] && s[i] != c)
+				i++;
+		}
 	}
-	str[i] = '\0';
-	return (str);
+	return (cnt);
 }
 
-char	**ft_freeall(char **list)
+char	*ft_word_make(char *word, char const *s, int k, int word_len)
 {
-	size_t	j;
-
-	j = 0;
-	while (list[j])
-	{
-		free(list[j]);
-		j++;
-	}
-	free(list);
-	return (NULL);
-}
-
-size_t	ft_wordcount(char const *s, char c)
-{
-	size_t	listsize;
-	size_t	i;
+	int		i;
 
 	i = 0;
-	listsize = 0;
-	while (s[i] != '\0')
+	while (word_len > 0)
+		word[i++] = s[k - word_len--];
+	word[i] = '\0';
+	return (word);
+}
+
+char	**ft_split2(char **result, char const *s, char c, int word_num)
+{
+	int		i;
+	int		k;
+	int		word_len;
+
+	i = 0;
+	k = 0;
+	word_len = 0;
+	while (s[k] && i < word_num)
 	{
-		if ((i == 0 && s[i] != c) || \
-		(s[i] == c && s[i + 1] != '\0' && s[i + 1] != c))
-			listsize++;
+		while (s[k] && s[k] == c)
+			k++;
+		while (s[k] && s[k] != c)
+		{
+			k++;
+			word_len++;
+		}
+		result[i] = (char *)malloc(sizeof(char) * (word_len + 1));
+		if (!result)
+			return (NULL);
+		ft_word_make(result[i], s, k, word_len);
+		word_len = 0;
 		i++;
 	}
-	return (listsize);
+	result[i] = 0;
+	return (result);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**strlist;
-	size_t	i;
-	size_t	k;
-	size_t	save;
+	int		word_num;
+	char	**result;
 
-	i = 0;
-	k = 0;
-	strlist = (char **)malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
-	if (!strlist)
+	if (s == 0)
 		return (NULL);
-	while (i < ft_wordcount(s, c) && s[k] != '\0')
-	{
-		while (s[k] == c)
-			k++;
-		save = k;
-		while (s[k] != c && s[k] != '\0')
-			k++;
-		strlist[i] = ft_strndup(&s[save], k - save);
-		if (strlist[i++] == 0)
-			return (ft_freeall(strlist));
-	}
-	strlist[i] = NULL;
-	return (strlist);
+	word_num = ft_word_count(s, c);
+	result = (char **)malloc(sizeof(char *) * (word_num + 1));
+	if (!result)
+		return (NULL);
+	ft_split2(result, s, c, word_num);
+	return (result);
 }

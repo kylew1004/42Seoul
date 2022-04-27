@@ -6,7 +6,7 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 10:21:13 by klew              #+#    #+#             */
-/*   Updated: 2022/03/27 16:24:33 by klew             ###   ########.fr       */
+/*   Updated: 2022/04/27 18:08:10 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,14 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char			*dst;
-	unsigned int	total;
-	unsigned int	i;
+	char	*call;
+	size_t	cur;
 
-	total = count * size;
-	dst = malloc(total);
-	if (!(dst))
-		return (NULL);
-	i = 0;
-	while (total--)
-	{
-		dst[i] = 0;
-		i++;
-	}
-	return ((void *)dst);
+	call = malloc(count * size);
+	if (!call)
+		return (0);
+	cur = -1;
+	while (++cur < size * count)
+		call[cur] = 0;
+	return (call);
 }
