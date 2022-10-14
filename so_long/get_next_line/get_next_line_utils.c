@@ -6,15 +6,15 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 10:25:36 by klew              #+#    #+#             */
-/*   Updated: 2022/08/23 10:30:14 by klew             ###   ########.fr       */
+/*   Updated: 2022/10/14 13:26:41 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+unsigned int	ft_strlen(const char *str)
 {
-	size_t	c;
+	unsigned int	c;
 
 	c = 0;
 	if (!str)
@@ -44,9 +44,9 @@ char	*ft_strchr(char *s, int c)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	i;
-	size_t	c;
-	char	*str;
+	unsigned int	i;
+	unsigned int	c;
+	char			*str;
 
 	if (!s1)
 	{

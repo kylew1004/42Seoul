@@ -6,11 +6,11 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 12:17:33 by klew              #+#    #+#             */
-/*   Updated: 2022/10/14 14:13:26 by klew             ###   ########.fr       */
+/*   Updated: 2022/10/14 13:34:49 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 void	render_img(t_data **data)
 {

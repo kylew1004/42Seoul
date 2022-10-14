@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_exit_door.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 10:25:58 by klew              #+#    #+#             */
-/*   Updated: 2022/10/14 13:26:13 by klew             ###   ########.fr       */
+/*   Created: 2022/10/14 12:44:28 by klew              #+#    #+#             */
+/*   Updated: 2022/10/14 12:52:33 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
+#include "../so_long.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
+void	exit_door(t_data ***data)
+{
+	int	x;
 
-# include <unistd.h>
-# include <stdlib.h>
-
-char			*get_next_line(int fd);
-char			*ft_get_line(char *save);
-char			*ft_save(char *save);
-char			*ft_read_and_save(int fd, char *save);
-char			*ft_strjoin(char *s1, char *s2);
-char			*ft_strchr(char *s, int c);
-unsigned int	ft_strlen(const char *str);
-
-#endif
+	x = 0;
+	while ((**data)->map[x])
+	{
+		free((**data)->map[x]);
+		x++;
+	}
+	free((**data)->map);
+	mlx_destroy_window((**data)->mlx, (**data)->win);
+	exit(1);
+}

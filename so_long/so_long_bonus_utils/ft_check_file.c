@@ -6,11 +6,11 @@
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:30:34 by klew              #+#    #+#             */
-/*   Updated: 2022/10/14 14:13:20 by klew             ###   ########.fr       */
+/*   Updated: 2022/10/14 13:34:54 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 static int	find(char *str, char *to_find)
 {

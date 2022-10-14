@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:19:51 by klew              #+#    #+#             */
-/*   Updated: 2022/10/14 14:21:20 by klew             ###   ########.fr       */
+/*   Updated: 2022/10/14 13:42:54 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	ft_exit(t_data *v)
 {
@@ -97,14 +97,8 @@ int	key_hook(int keycode, t_data *data)
 	return (0);
 }
 
-void leaks(void)
-{
-	system("leaks so_long");
-}
-
 int	main(int argc, char **argv)
 {
-	atexit(leaks);
 	t_data	data;
 
 	if (argc <= 1)
@@ -128,6 +122,5 @@ int	main(int argc, char **argv)
 		mlx_loop_hook(data.mlx, animation, &data);
 		mlx_loop(data.mlx);
 	}
-	
 	return (0);
 }
