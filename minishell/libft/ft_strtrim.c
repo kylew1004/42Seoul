@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 11:17:21 by klew              #+#    #+#             */
-/*   Updated: 2022/04/20 21:24:26 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/15 21:22:20 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+int	check_set(unsigned char s1, char const *set)
+{
+	while (*set)
+	{
+		if (s1 == *set)
+			return (1);
+		set++;
+	}
+	return (0);
+}
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
