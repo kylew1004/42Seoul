@@ -6,12 +6,12 @@
 /*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:24:15 by klew              #+#    #+#             */
-/*   Updated: 2023/01/15 13:50:19 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/15 21:29:23 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft.h"
+#include "../includes/minishell.h"
+#include "../libft/libft.h"
 
 static char	*fll_wrd(char *w, char *s, char c)
 {
@@ -23,7 +23,7 @@ static char	*fll_wrd(char *w, char *s, char c)
 	while (s[len] != c && s[len])
 	{
 		if (s[len] == '\"' || s[len] == '\'')
-			skip_quote(&s[len], &len);
+			skip_quote(&s[len]);
 		if (s[len] != c)
 			len++;
 	}

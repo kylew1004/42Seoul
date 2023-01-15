@@ -6,7 +6,7 @@
 /*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 13:51:45 by klew              #+#    #+#             */
-/*   Updated: 2023/01/15 20:45:04 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/15 21:26:14 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	check_tokens(char *line, t_minishell *minishell)
 	while (*line)
 	{
 		if (*line == '\"' || *line == '\'')
-			line = skip_quote(line, 0);
+			line = skip_quote(line);
 		if (check_set(*line, "|<>"))
 		{
 			if (!special_char_check(line, minishell))
