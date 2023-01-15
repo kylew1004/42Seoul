@@ -6,7 +6,7 @@
 /*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:42:08 by klew              #+#    #+#             */
-/*   Updated: 2023/01/09 12:44:42 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/11 16:44:20 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ typedef struct s_pipex
 {
 	int	new_pipe[2];
 	int	last_pipe;
-	int	am_cmds;
-	int	iter;
-	int	heredoc;
 }	t_pipex;
 
 typedef struct s_minishell

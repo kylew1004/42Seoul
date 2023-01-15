@@ -4,5 +4,4 @@ a.out
 *.o
 *.a
 redirections
-signals
 main
