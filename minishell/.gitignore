@@ -4,5 +4,3 @@ a.out
 *.o
 *.a
 redirections
-main/minishells.c
-main/parse.c
