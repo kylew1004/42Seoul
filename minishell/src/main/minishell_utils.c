@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 13:41:42 by klew              #+#    #+#             */
-/*   Updated: 2023/01/15 21:29:41 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/16 12:32:29 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
-#include <stdlib.h>
+#include "minishell.h"
 
 char	*skip_whitespace(char *line)
 {
@@ -54,8 +52,8 @@ char	*ft_strdup_shell(const char *s1)
 
 	len = ft_strlen(s1) + 1;
 	dst = malloc(len * sizeof(char));
-	if (!dst)
-		error_handle("malloc");
+	//if (!dst)
+		//error_handle("malloc");
 	return (ft_memcpy(dst, s1, len));
 }
 

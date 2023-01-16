@@ -3,46 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:43:15 by klew              #+#    #+#             */
-/*   Updated: 2023/01/16 09:44:00 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/16 12:02:29 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include <limits.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/types.h>
+#include "minishell.h"
 
 static void	minishell_init(t_minishell *minishell, char **env)
 {
-	rl_catch_signals = 0;
-	minishell->env = make_env(env);
+	(void)env;
+	//minishell->env = make_env(env);
 	minishell->stdin_fd = dup(STDIN_FILENO);
 	minishell->stdout_fd = dup(STDOUT_FILENO);
 	minishell->exit_code = 0;
-	if (minishell->stdin_fd < 0 || \
-		minishell->stdout_fd < 0)
-		error_handle("dup");
+
 	minishell->sig = 0;
 }
 
 static void	minishell_reset(t_minishell *minishell)
 {
-	ft_dupstds(minishell->stdin_fd, minishell->stdout_fd);
+	//ft_dupstds(minishell->stdin_fd, minishell->stdout_fd);
 	minishell->sig = 0;
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_minishell	minishell;
-
 	(void)argc;
 	(void)argv;
 

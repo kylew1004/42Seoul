@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 13:51:45 by klew              #+#    #+#             */
-/*   Updated: 2023/01/15 21:26:14 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/16 12:29:45 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
-#include <unistd.h>
+#include "minishell.h"
 
 int	end_check(char *line)
 {

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_shell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:24:15 by klew              #+#    #+#             */
-/*   Updated: 2023/01/15 21:29:23 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/16 12:03:37 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
+#include "minishell.h"
 
 static char	*fll_wrd(char *w, char *s, char c)
 {
@@ -88,7 +87,7 @@ char	**ft_split_shell(char *s, char c)
 		words[i] = fll_wrd(words[i], s, c);
 		if (!words[i])
 		{
-			free_ptrarray(words);
+			//free_ptrarray(words);
 			return (0);
 		}
 		s = next_w(s, c);

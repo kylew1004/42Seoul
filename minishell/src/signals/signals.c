@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:05:15 by klew              #+#    #+#             */
-/*   Updated: 2023/01/09 13:03:51 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/16 12:02:18 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include <limits.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/types.h>
+#include "minishell.h"
 
 void	sigint_handler_in_process(int sig)
 {
