@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:42:08 by klew              #+#    #+#             */
-/*   Updated: 2023/01/16 14:04:56 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/16 14:35:15 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <sys/types.h>
-
+#include <signal.h>
 
 typedef struct s_pipex
 {
