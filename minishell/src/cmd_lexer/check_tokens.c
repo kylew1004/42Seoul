@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 13:51:45 by klew              #+#    #+#             */
-/*   Updated: 2023/01/16 12:29:45 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/20 16:50:46 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	end_check(char *line)
 
 void	unexpected_token(char *c, t_minishell *minishell, int nl)
 {
-	write(2, "msh: syntax error near unexpected token `", 41);
+	write(2, "Minishell: syntax error near unexpected token `", 47);
 	if (nl)
 		ft_putstr_fd(c, 2);
 	else
@@ -50,7 +50,7 @@ int	special_char_check(char *line, t_minishell *minishell)
 		}
 		if (end_check(line + 1))
 		{
-			unexpected_token("newline", minishell, 1);
+			unexpected_token("Newline", minishell, 1);
 			return (0);
 		}
 		line++;
@@ -85,6 +85,8 @@ int	check_tokens(char *line, t_minishell *minishell)
 		unexpected_token(line, minishell, 0);
 		return (0);
 	}
+	if (!*line)
+		return (0);
 	while (*line)
 	{
 		if (*line == '\"' || *line == '\'')

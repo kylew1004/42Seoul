@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_path.c                                         :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 11:51:33 by klew              #+#    #+#             */
-/*   Updated: 2023/01/16 12:32:11 by klew             ###   ########.fr       */
+/*   Created: 2023/01/18 22:00:54 by klew              #+#    #+#             */
+/*   Updated: 2023/01/19 23:23:42 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "minishell.h"
+
+void	ft_dupstds(int in, int out)
+{
+	if (dup2(in, STDIN_FILENO) < 0 || \
+		dup2(out, STDOUT_FILENO) < 0)
+		error_handle("dup2");
+}
 
 int	error_handle(char const *s)
 {
-	ft_putstr_fd("msh: ", 2);
+	ft_putstr_fd("Minishell: ", 2);
 	perror(s);
 	exit(EXIT_FAILURE);
 }

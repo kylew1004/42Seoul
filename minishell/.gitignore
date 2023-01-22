@@ -4,3 +4,4 @@ a.out
 *.o
 *.a
 ./minishell
+test/

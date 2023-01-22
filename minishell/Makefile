@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: klew <klew@student.42.fr>                  +#+  +:+       +#+         #
+#    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 09:46:05 by klew              #+#    #+#              #
-#    Updated: 2023/01/16 14:22:15 by klew             ###   ########.fr        #
+#    Updated: 2023/01/21 03:44:23 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+CFLAGS_D = -g -Wall -Wextra -Werror
 COMPILE = $(CC) $(CFLAGS)
 LIBFT = ./libft
 LIB = $(LIBFT)/libft.a
@@ -31,11 +32,20 @@ LIBS =	-lreadline\
 SDIR = ./src
 SRCS =	minishell.c\
 		minishell_utils.c\
+		pipex.c\
+		pipex_utils.c\
 		parse.c\
 		check_tokens.c\
 		ft_split_shell.c\
+		ft_split_cmd.c\
+		ft_strip_quotes.c\
 		signals.c\
-		add_path.c
+		expansions.c expansions_utils.c ft_getenv.c\
+		builtin_echo.c builtin_cd.c builtin_pwd.c builtin_exit.c \
+		builtin_env.c builtin_export.c builtin_unset.c search_builtin.c \
+		variable.c environment.c sort_var.c \
+		redirection.c heredoc.c control_redirect.c get_splitted_redirect.c heredoc_utils.c\
+		remove_redirections.c control_execute.c execute_utils.c
 
 ODIR = ./obj
 OBJS = $(patsubst %,$(ODIR)/%,$(SRCS:.c=.o))
@@ -43,10 +53,9 @@ OBJS = $(patsubst %,$(ODIR)/%,$(SRCS:.c=.o))
 $(ODIR)/%.o : $(SDIR)/*/%.c
 	@mkdir -p obj
 	@echo "Creating object : $@"
-	@echo $<
 	@$(COMPILE) $(INCLUDES) -c -o $@ $<
 
-all: libft | $(NAME)
+all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
 	@echo "Creating executable $(NAME)"
@@ -66,12 +75,9 @@ fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C $(LIBFT)
 
-libft:
-	@$(MAKE) -C $(LIBFT)
+$(addprefix libft/,libft.a):
+	@$(MAKE) -C $(LIBFT) bonus
 
 re: fclean | all
-
-haha:
-	echo $${HOME}
 
 .PHONY: all clean fclean libft run re

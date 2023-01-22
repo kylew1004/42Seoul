@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klew <klew@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:05:15 by klew              #+#    #+#             */
-/*   Updated: 2023/01/16 12:02:18 by klew             ###   ########.fr       */
+/*   Updated: 2023/01/21 16:07:06 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	sigint_handler_in_process(int sig)
-{
-	(void) sig;
-	printf("\n");
-}
-
-void	sigquit_handler_in_process(int sig)
-{
-	printf("Quit: %d\n", sig);
-}
 
 void	sigint_handler(int sig)
 {
@@ -32,18 +21,25 @@ void	sigint_handler(int sig)
 	rl_redisplay();
 }
 
-void	sig_in_process(char *cmd)
+void	sigint_handler_heredoc(int sig)
 {
-	if (!strncmp(cmd, "./minishell", 12) || !strncmp(cmd, "bash", 5))
+	if (sig == SIGINT)
 	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		exit(1);
 	}
-	else
-	{
-		signal(SIGINT, sigint_handler_in_process);
-		signal(SIGQUIT, sigquit_handler_in_process);
-	}
+}
+
+void	sig_default(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
+
+void	sig_ignore(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	signals(void)
