@@ -6,94 +6,73 @@
 /*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 20:09:05 by klew              #+#    #+#             */
-/*   Updated: 2023/03/08 11:32:46 by klew             ###   ########.fr       */
+/*   Updated: 2023/03/09 16:44:51 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmath>
 #include "Fixed.hpp"
 
-Fixed::Fixed( void ): _fixedPointValue(0)
+Fixed::Fixed(void) 
 {
 	std::cout << "Default constructor called" << std::endl;
-	return;
+	this->value = 0;
 }
 
-Fixed::Fixed( const int value )
-{
-	std::cout << "Constant integer constructor called" << std::endl;
-	this->_fixedPointValue = value << this->_numFractBits;
-	return;
-}
-
-Fixed::Fixed( const float value )
-{
-	int power = pow(2, this->_numFractBits);
-
-	std::cout << "Constant float constructor called" << std::endl;
-	this->_fixedPointValue = roundf(value * power);
-	return;
-}
-
-Fixed::Fixed( Fixed const & src )
+Fixed::Fixed(const Fixed& obj) 
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = src;
-	return;
+	this->value = obj.getRawBits();
 }
 
-Fixed::~Fixed( void )
+Fixed& Fixed::operator=(const Fixed& obj) 
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &obj)
+	{
+		this->value = obj.getRawBits();
+	}
+	return (*this);
+}
+
+Fixed::~Fixed(void) 
 {
 	std::cout << "Destructor called" << std::endl;
-	return;
 }
 
-Fixed &	Fixed::operator=( Fixed const & rhs )
+Fixed::Fixed(int num)
 {
-	std::cout << "Assignement operator called" << std::endl;
-	if (this != &rhs)
-		this->_fixedPointValue = rhs._fixedPointValue;
-	return *this;
+	std::cout << "Int constructor called" << std::endl;
+	this->value = num << this->bits;
 }
 
-int	Fixed::toInt( void ) const
+Fixed::Fixed(const float num)
 {
-	return (this->_fixedPointValue >> this->_numFractBits);
+	std::cout << "Float constructor called" << std::endl;
+	this->value = roundf(num * (1 << this->bits));
 }
 
-float	Fixed::toFloat( void ) const
+int	Fixed::getRawBits(void) const
 {
-	int		power = pow(2, this->_numFractBits);
-	float	result = (float)this->_fixedPointValue / power;
-	return (result);
+	return (this->value);
 }
 
-int	Fixed::getRawBits( void ) const
+void	Fixed::setRawBits(int const raw)
 {
-	return (this->_fixedPointValue);
+	this->value = raw;
 }
 
-void	Fixed::setRawBits( const int raw )
+float	Fixed::toFloat(void) const
 {
-	this->_fixedPointValue = raw;
+	return ((float)this->value / (1 << this->bits)); 
 }
 
-std::ostream &	operator<<( std::ostream & ostr, Fixed const & instance)
+int	Fixed::toInt(void) const
 {
-	ostr << instance.toFloat();
-	return (ostr);
+	return (this->value >> this->bits);
 }
 
-int		ft_pow(int val, int pow)
+std::ostream& operator <<(std::ostream &out, const Fixed &fixed)
 {
-	int		i = 0;
-	int		result;
-
-	result = 1;
-	while (i < pow)
-	{
-		result *= val;
-		i++;
-	}
-	return (result);
+	out << fixed.toFloat();
+	return (out);
 }
