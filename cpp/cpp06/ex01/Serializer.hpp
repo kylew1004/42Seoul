@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 09:32:14 by klew              #+#    #+#             */
-/*   Updated: 2023/05/23 15:06:16 by klew             ###   ########.fr       */
+/*   Created: 2023/05/24 11:53:13 by klew              #+#    #+#             */
+/*   Updated: 2023/05/24 12:13:02 by klew             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
+#ifndef Serializer_HPP
+# define Serializer_HPP
 
-int main()
+# include <iostream>
+
+typedef	struct s_data
 {
-	Base * a;
-	Base * b;
+	std::string	data;
+}	Data;
 
-	srand(time(NULL));
-	
-	a = generate();
-	b = generate();
+class Serializer
+{
+	private:
+		Serializer();
+		~Serializer();
+		Serializer(const Serializer& source);
+		Serializer& operator=(const Serializer& source);
+	public:
+		static uintptr_t	serialize(Data* ptr);
+		static Data*		deserialize(uintptr_t raw);
+};
 
-	identify(a);
-	identify(b);
 
-	identify(*a);
-	identify(*b);
-
-	delete a;
-	delete b;
-	return (0);
-}
+#endif

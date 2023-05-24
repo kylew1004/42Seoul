@@ -6,7 +6,7 @@
 #    By: klew <klew@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 09:30:23 by klew              #+#    #+#              #
-#    Updated: 2023/05/23 15:03:03 by klew             ###   ########.fr        #
+#    Updated: 2023/05/24 12:02:02 by klew             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CXX			=	c++
 CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -f
 
-SRC			=	main.cpp
+SRC			=	main.cpp Serializer.cpp
 				
 OBJ			=	$(SRC:.cpp=.o)
 
